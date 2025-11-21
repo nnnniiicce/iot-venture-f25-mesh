@@ -1,0 +1,46 @@
+# Copyright (c) 2021 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig I2S_NRFX
+	bool "nRF I2S nrfx driver"
+	default y
+	depends on DT_HAS_NORDIC_NRF_I2S_ENABLED
+	select NRFX_I2S0 if HAS_HW_NRF_I2S0
+	select NRFX_I2S20 if HAS_HW_NRF_I2S20
+	select PINCTRL
+	help
+	  Enable support for nrfx I2S driver for nRF MCU series.
+
+if I2S_NRFX
+
+config I2S_NRFX_RX_BLOCK_COUNT
+	int "RX queue length"
+	default 4
+
+config I2S_NRFX_TX_BLOCK_COUNT
+	int "TX queue length"
+	default 4
+
+endif # I2S_NRFX
+
+menuconfig TDM_NRFX
+	bool "nRF TDM nrfx driver"
+	default y
+	depends on DT_HAS_NORDIC_NRF_TDM_ENABLED
+	select NRFX_TDM130 if HAS_HW_NRF_TDM130
+	select CLOCK_CONTROL
+	select PINCTRL
+	help
+	  Enable support for nrfx TDM driver for nRF MCU series.
+
+if TDM_NRFX
+
+config TDM_NRFX_RX_BLOCK_COUNT
+	int "RX queue length"
+	default 4
+
+config TDM_NRFX_TX_BLOCK_COUNT
+	int "TX queue length"
+	default 4
+
+endif # TDM_NRFX
